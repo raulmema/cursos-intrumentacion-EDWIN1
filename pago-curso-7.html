@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pago Curso Edición #7 | Instrumentación Edwin Mena</title>
+    <meta
+      name="description"
+      content="Página de pago del Curso Técnico de Instrumentación Edición #7."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="course-flow-page">
+    <header class="flow-header">
+      <div class="container flow-nav">
+        <a href="index.html#proximos" class="brand flow-brand">
+          <img src="images/logo.jpeg" alt="Logo Instrumentación Edwin Mena" />
+          <span>Instrumentación Edwin Mena</span>
+        </a>
+        <a class="btn secondary" href="curso-7-material.html">
+          Ya pagué, ver material
+        </a>
+      </div>
+    </header>
+
+    <main class="flow-main">
+      <section class="container flow-grid">
+        <article class="panel flow-copy">
+          <span class="section-kicker">Pago seguro por validación manual</span>
+          <h1>Curso Técnico de Instrumentación - Edición #7</h1>
+          <p>
+            Completa tus datos, realiza el pago por el método disponible y envía
+            el comprobante por WhatsApp. Luego se validará tu inscripción para
+            activar el acceso al material del curso.
+          </p>
+
+          <div class="course-seven-price">
+            <strong>S/ 100</strong>
+            <span>Pronto pago. Precio general: S/ 150</span>
+          </div>
+
+          <ul class="flow-steps">
+            <li>
+              <strong>1. Registra tus datos</strong>
+              <span>Usa el mismo correo para pagar y acceder al material.</span>
+            </li>
+            <li>
+              <strong>2. Realiza el pago</strong>
+              <span>Yape o transferencia según disponibilidad.</span>
+            </li>
+            <li>
+              <strong>3. Envía el comprobante</strong>
+              <span
+                >El administrador activará tu campo pagado en Firebase.</span
+              >
+            </li>
+          </ul>
+        </article>
+
+        <aside class="panel payment-page-card">
+          <h2>Realizar pago</h2>
+          <p>
+            Primero deja tus datos para crear tu registro de acceso. Después
+            envía tu comprobante por WhatsApp.
+          </p>
+
+          <form class="contact-form" id="paymentForm">
+            <input
+              type="text"
+              id="paymentName"
+              placeholder="Tu nombre"
+              required
+            />
+            <input
+              type="email"
+              id="paymentEmail"
+              placeholder="Correo para acceder al material"
+              required
+            />
+            <input
+              type="tel"
+              id="paymentPhone"
+              placeholder="WhatsApp o teléfono"
+              required
+            />
+            <select id="paymentMethod" required>
+              <option value="">Selecciona método de pago</option>
+              <option value="Yape">Yape</option>
+              <option value="Transferencia Interbank">
+                Transferencia Interbank
+              </option>
+            </select>
+            <button class="btn primary" type="submit">
+              Registrar pago pendiente
+            </button>
+          </form>
+
+          <p class="access-message" id="paymentMessage">
+            Tu acceso se habilita después de validar el comprobante.
+          </p>
+
+          <div class="payment-options payment-options-page">
+            <article>
+              <h3>Yape</h3>
+              <img src="images/logo1.png" alt="Referencia de pago por Yape" />
+              <p>Solicita el QR actualizado por WhatsApp antes de pagar.</p>
+            </article>
+
+            <article>
+              <h3>Transferencia</h3>
+              <p>
+                Solicita los datos de cuenta para confirmar titular, monto y
+                concepto del pago.
+              </p>
+            </article>
+          </div>
+
+          <div class="flow-actions">
+            <a
+              href="https://wa.me/51955735445?text=Hola%2C%20ya%20realic%C3%A9%20el%20pago%20del%20Curso%20de%20Instrumentaci%C3%B3n%20Edici%C3%B3n%20%237%2C%20adjunto%20mi%20comprobante"
+              class="btn pay-now"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Enviar comprobante</a
+            >
+            <a
+              href="curso-7-material.html"
+              class="btn secondary"
+              >Ir al material del curso</a
+            >
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAc2zoiopusIn3mm394UFBdyR0F-si4-zQ",
+        authDomain: "cursos-instrumentacion.firebaseapp.com",
+        projectId: "cursos-instrumentacion",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const paymentForm = document.getElementById("paymentForm");
+      const paymentMessage = document.getElementById("paymentMessage");
+      const cursoEdicion7 = "Curso Técnico de Instrumentación - Edición #7";
+
+      paymentForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const nombre = document.getElementById("paymentName").value.trim();
+        const correo = document.getElementById("paymentEmail").value.trim();
+        const telefono = document.getElementById("paymentPhone").value.trim();
+        const metodoPago = document.getElementById("paymentMethod").value;
+
+        paymentMessage.textContent = "Registrando tu pago pendiente...";
+        paymentMessage.className = "access-message";
+
+        try {
+          await addDoc(collection(db, "alumnos"), {
+            nombre,
+            correo,
+            telefono,
+            curso: cursoEdicion7,
+            cursoId: "curso-edicion-7",
+            metodoPago,
+            pagado: false,
+            estadoPago: "pendiente de validación",
+            fecha: new Date().toISOString(),
+          });
+
+          paymentMessage.textContent =
+            "Registro creado. Ahora envía tu comprobante por WhatsApp para activar el acceso.";
+          paymentMessage.classList.add("is-approved");
+        } catch (error) {
+          console.error(error);
+          paymentMessage.textContent =
+            "No pudimos registrar el pago pendiente. Intenta nuevamente o escribe por WhatsApp.";
+        }
+      });
+    </script>
+  </body>
+</html>

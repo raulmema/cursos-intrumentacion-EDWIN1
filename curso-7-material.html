@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Material Curso Edición #7 | Instrumentación Edwin Mena</title>
+    <meta
+      name="description"
+      content="Acceso al material y documentación del Curso Técnico de Instrumentación Edición #7."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="course-flow-page">
+    <header class="flow-header">
+      <div class="container flow-nav">
+        <a href="index.html#proximos" class="brand flow-brand">
+          <img src="images/logo.jpeg" alt="Logo Instrumentación Edwin Mena" />
+          <span>Instrumentación Edwin Mena</span>
+        </a>
+        <a class="btn secondary" href="pago-curso-7.html">Pagar curso</a>
+      </div>
+    </header>
+
+    <main class="flow-main">
+      <section class="container material-shell">
+        <div class="section-heading">
+          <span class="section-kicker">Acceso al curso</span>
+          <h1>Material del Curso Técnico de Instrumentación - Edición #7</h1>
+          <p>
+            Ingresa el correo con el que realizaste tu inscripción. El contenido
+            se mostrará solo si tu pago ya fue validado.
+          </p>
+        </div>
+
+        <article class="panel access-box material-access">
+          <form class="access-form" id="accessForm">
+            <input
+              type="email"
+              id="accessEmail"
+              placeholder="Correo registrado"
+              required
+            />
+            <button class="btn primary" type="submit">Acceder al curso</button>
+          </form>
+
+          <p class="access-message" id="accessMessage">
+            Debes pagar para acceder al contenido del curso.
+          </p>
+        </article>
+
+        <section
+          class="exclusive-content material-content"
+          id="exclusiveContent"
+        >
+          <div class="material-hero panel">
+            <div>
+              <span class="section-kicker">Acceso aprobado</span>
+              <h2>Bienvenido al área de alumnos</h2>
+              <p>
+                Aquí encontrarás información general, documentación técnica y
+                recursos importantes de la Edición #7.
+              </p>
+            </div>
+            <a
+              href="https://wa.me/51955735445?text=Hola%2C%20ya%20tengo%20acceso%20al%20material%20del%20Curso%20Edici%C3%B3n%20%237"
+              class="btn secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Soporte por WhatsApp</a
+            >
+          </div>
+
+          <div class="material-grid">
+            <article class="panel material-card">
+              <span>Información general</span>
+              <h3>Datos del curso</h3>
+              <ul>
+                <li>Inicio: 25 de mayo</li>
+                <li>Horario: lunes y martes, 7:00 p.m. - 9:00 p.m.</li>
+                <li>Modalidad: Zoom / Google Meet</li>
+                <li>Instructor: Edwin Mena</li>
+              </ul>
+            </article>
+
+            <article class="panel material-card">
+              <span>Documentación importante</span>
+              <h3>Temario técnico</h3>
+              <ul>
+                <li>Automatización y lectura de P&amp;ID</li>
+                <li>Filosofía de operación y control</li>
+                <li>Instrumentos según API 12L</li>
+                <li>Arquitectura y comunicación industrial</li>
+              </ul>
+            </article>
+
+            <article class="panel material-card">
+              <span>Material de clase</span>
+              <h3>Recursos entregables</h3>
+              <ul>
+                <li>PDF de sesiones y apuntes del curso</li>
+                <li>Plantillas para lazos de control</li>
+                <li>Matriz causa-efecto</li>
+                <li>Formatos base para ingeniería básica</li>
+              </ul>
+            </article>
+
+            <article class="panel material-card">
+              <span>Grabaciones</span>
+              <h3>Sesiones en vivo</h3>
+              <p>
+                Los enlaces de grabación se agregan aquí conforme avance la
+                edición del curso.
+              </p>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+        query,
+        where,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAc2zoiopusIn3mm394UFBdyR0F-si4-zQ",
+        authDomain: "cursos-instrumentacion.firebaseapp.com",
+        projectId: "cursos-instrumentacion",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const accessForm = document.getElementById("accessForm");
+      const accessMessage = document.getElementById("accessMessage");
+      const exclusiveContent = document.getElementById("exclusiveContent");
+      const comprobanteWhatsApp =
+        "https://wa.me/51955735445?text=Hola%2C%20ya%20realic%C3%A9%20el%20pago%20del%20curso%20Edici%C3%B3n%20%237%2C%20adjunto%20mi%20comprobante";
+
+      accessForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const correo = document.getElementById("accessEmail").value.trim();
+        accessMessage.textContent = "Verificando acceso...";
+        accessMessage.className = "access-message";
+        exclusiveContent.classList.remove("is-visible");
+
+        try {
+          const alumnosQuery = query(
+            collection(db, "alumnos"),
+            where("correo", "==", correo),
+          );
+          const querySnapshot = await getDocs(alumnosQuery);
+
+          const registrosCurso7 = querySnapshot.docs.filter(
+            (studentDoc) => studentDoc.data().cursoId === "curso-edicion-7",
+          );
+
+          if (registrosCurso7.length === 0) {
+            accessMessage.innerHTML =
+              'No encontramos un registro para este correo. <a href="pago-curso-7.html">Realizar pago</a>.';
+            return;
+          }
+
+          const tienePago = registrosCurso7.some(
+            (studentDoc) => studentDoc.data().pagado === true,
+          );
+
+          if (tienePago) {
+            accessMessage.textContent =
+              "Acceso aprobado. Ya puedes ver el material del curso.";
+            accessMessage.classList.add("is-approved");
+            exclusiveContent.classList.add("is-visible");
+          } else {
+            accessMessage.innerHTML =
+              'Tu pago aún no está validado. <a href="' +
+              comprobanteWhatsApp +
+              '" target="_blank" rel="noopener noreferrer">Enviar comprobante por WhatsApp</a>.';
+          }
+        } catch (error) {
+          console.error(error);
+          accessMessage.textContent =
+            "No pudimos verificar el acceso. Intenta nuevamente o escribe por WhatsApp.";
+        }
+      });
+    </script>
+  </body>
+</html>
