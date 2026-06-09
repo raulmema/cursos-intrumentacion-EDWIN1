@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --bg: #f3f6f8;
   --surface: rgba(255, 255, 255, 0.9);
   --surface-strong: #ffffff;
@@ -30,7 +30,11 @@ body {
   font-family: "Manrope", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(15, 118, 110, 0.12), transparent 34%),
+    radial-gradient(
+      circle at top left,
+      rgba(15, 118, 110, 0.12),
+      transparent 34%
+    ),
     linear-gradient(180deg, #edf3f7 0%, #f8fbfc 24%, #eff4f7 100%);
   line-height: 1.6;
 }
@@ -72,7 +76,11 @@ select {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 10%, rgba(192, 138, 47, 0.2), transparent 26%),
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(192, 138, 47, 0.2),
+      transparent 26%
+    ),
     radial-gradient(circle at 85% 15%, rgba(15, 118, 110, 0.3), transparent 24%);
   pointer-events: none;
 }
@@ -357,7 +365,11 @@ h1 {
 }
 
 .section-alt {
-  background: linear-gradient(180deg, rgba(15, 118, 110, 0.04), rgba(192, 138, 47, 0.05));
+  background: linear-gradient(
+    180deg,
+    rgba(15, 118, 110, 0.04),
+    rgba(192, 138, 47, 0.05)
+  );
 }
 
 .section-heading {
@@ -383,12 +395,19 @@ h1 {
 
 .instructor-panel {
   display: grid;
-  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 0.9fr) minmax(
+      320px,
+      1.1fr
+    );
   gap: 34px;
   align-items: center;
   padding: clamp(28px, 5vw, 46px);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(240, 248, 247, 0.94)),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(240, 248, 247, 0.94)
+    ),
     var(--surface-strong);
 }
 
@@ -603,7 +622,11 @@ h1 {
   overflow: hidden;
   border-color: rgba(192, 138, 47, 0.28);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(246, 250, 250, 0.92)),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(246, 250, 250, 0.92)
+    ),
     var(--surface-strong);
   box-shadow: 0 28px 70px rgba(9, 23, 39, 0.18);
 }
@@ -773,7 +796,11 @@ h1 {
 .featured-pricing {
   position: relative;
   border: 1px solid rgba(15, 118, 110, 0.24);
-  background: linear-gradient(180deg, rgba(15, 118, 110, 0.06), rgba(255, 255, 255, 0.96));
+  background: linear-gradient(
+    180deg,
+    rgba(15, 118, 110, 0.06),
+    rgba(255, 255, 255, 0.96)
+  );
 }
 
 .featured-badge {
@@ -1171,14 +1198,18 @@ h1 {
 }
 
 body {
-  background:
-    linear-gradient(180deg, #f5f8f7 0%, #ffffff 34%, #eef4f3 100%);
+  background: linear-gradient(180deg, #f5f8f7 0%, #ffffff 34%, #eef4f3 100%);
 }
 
 .hero {
   min-height: auto;
   background:
-    linear-gradient(115deg, rgba(5, 12, 22, 0.94) 0%, rgba(8, 34, 42, 0.82) 54%, rgba(5, 12, 22, 0.76) 100%),
+    linear-gradient(
+      115deg,
+      rgba(5, 12, 22, 0.94) 0%,
+      rgba(8, 34, 42, 0.82) 54%,
+      rgba(5, 12, 22, 0.76) 100%
+    ),
     url("images/fondo.png") center/cover no-repeat;
 }
 
@@ -1345,8 +1376,11 @@ h1 {
 }
 
 .stat {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.06)
+  );
 }
 
 .stat strong {
@@ -1466,8 +1500,11 @@ h1 {
 
 .course-seven-price {
   align-items: center;
-  background:
-    linear-gradient(135deg, rgba(196, 145, 55, 0.18), rgba(255, 255, 255, 0.92));
+  background: linear-gradient(
+    135deg,
+    rgba(196, 145, 55, 0.18),
+    rgba(255, 255, 255, 0.92)
+  );
 }
 
 .course-seven-price strong {
@@ -1504,8 +1541,11 @@ h1 {
   display: flex;
   flex-direction: column;
   padding: clamp(24px, 4vw, 38px);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.08));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.08)
+  );
   border-color: rgba(255, 255, 255, 0.16);
   box-shadow: 0 34px 88px rgba(0, 0, 0, 0.22);
 }
@@ -1941,5 +1981,70 @@ h1 {
   .material-shell h1 {
     max-width: 100%;
     font-size: clamp(2.3rem, 11vw, 3.5rem);
+  }
+}
+@media (max-width: 780px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .instructor-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upcoming-grid,
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .course-seven-card {
+    grid-template-columns: 1fr;
+  }
+
+  .course-seven-media img {
+    min-height: 260px;
+    object-fit: cover;
+  }
+
+  h1 {
+    max-width: 100%;
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  h1 {
+    max-width: 100% !important;
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  .hero-text {
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+
+  .navbar {
+    padding: 10px 14px;
   }
 }
